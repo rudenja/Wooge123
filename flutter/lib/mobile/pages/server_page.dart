@@ -385,10 +385,10 @@ class ScamWarningDialogState extends State<ScamWarningDialog> {
                             : () {
                                 Navigator.of(context).pop();
                                 _serverModel.toggleService();
-                                if (show_warning) {
-                                  bind.mainSetLocalOption(
-                                      key: "show-scam-warning", value: "N");
-                                }
+                                // if (show_warning) {
+                                //   bind.mainSetLocalOption(
+                                //       key: "show-scam-warning", value: "N");
+                                // }
                               },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueAccent,
@@ -578,9 +578,7 @@ class _PermissionCheckerState extends State<PermissionChecker> {
               translate("Screen Capture"),
               serverModel.mediaOk,
               !serverModel.mediaOk &&
-                      gFFI.userModel.userName.value.isEmpty &&
-                      bind.mainGetLocalOption(key: "show-scam-warning") != "N"
-                  ? () => showScamWarning(context, serverModel)
+                      gFFI.userModel.userName.value.isEmpty && ? () => serverModel.toggleService
                   : serverModel.toggleService),
           PermissionRow(translate("Input Control"), serverModel.inputOk,
               serverModel.toggleInput),
