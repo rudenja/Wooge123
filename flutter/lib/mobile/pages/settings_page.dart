@@ -428,6 +428,53 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
                     key: kOptionDirectServer, value: value);
                 setState(() {});
               },
+      ),
+      SettingsTile.switchTile(
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    Text(translate("auto_disconnect_option_tip")),
+                    Offstage(
+                        offstage: !_allowAutoDisconnect,
+                        child: Text(
+                          '${_autoDisconnectTimeout.isEmpty ? '10' : _autoDisconnectTimeout} min',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        )),
+                  ])),
+              Offstage(
+                  offstage: !_allowAutoDisconnect,
+                  child: IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: Icon(
+                        Icons.edit,
+                        size: 20,
+                      ),
+                      onPressed: isOptionFixed(kOptionAutoDisconnectTimeout)
+                          ? null
+                          : () async {
+                              final timeout = await changeAutoDisconnectTimeout(
+                                  _autoDisconnectTimeout);
+                              setState(() {
+                                _autoDisconnectTimeout = timeout;
+                              });
+                            }))
+            ]),
+        initialValue: _allowAutoDisconnect,
+        onToggle: isOptionFixed(kOptionAllowAutoDisconnect)
+            ? null
+            : (_) async {
+                _allowAutoDisconnect = !_allowAutoDisconnect;
+                String value = bool2option(
+                    kOptionAllowAutoDisconnect, _allowAutoDisconnect);
+                await bind.mainSetOption(
+                    key: kOptionAllowAutoDisconnect, value: value);
+                setState(() {});
+              },
       )
     ];
     if (_hasIgnoreBattery) {
@@ -558,24 +605,24 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
       sections: [
         customClientSection,
         if (!bind.isDisableAccount())
-          // SettingsSection(
-          //   title: Text(translate('Account')),
-          //   tiles: [
-          //     SettingsTile(
-          //       title: Obx(() => Text(gFFI.userModel.userName.value.isEmpty
-          //           ? translate('Login')
-          //           : '${translate('Logout')} (${gFFI.userModel.userName.value})')),
-          //       leading: Icon(Icons.person),
-          //       onPressed: (context) {
-          //         if (gFFI.userModel.userName.value.isEmpty) {
-          //           loginDialog();
-          //         } else {
-          //           logOutConfirmDialog();
-          //         }
-          //       },
-          //     ),
-          //   ],
-          // ),
+          SettingsSection(
+            title: Text(translate('Account')),
+            tiles: [
+              SettingsTile(
+                title: Obx(() => Text(gFFI.userModel.userName.value.isEmpty
+                    ? translate('Login')
+                    : '${translate('Logout')} (${gFFI.userModel.userName.value})')),
+                leading: Icon(Icons.person),
+                onPressed: (context) {
+                  if (gFFI.userModel.userName.value.isEmpty) {
+                    loginDialog();
+                  } else {
+                    logOutConfirmDialog();
+                  }
+                },
+              ),
+            ],
+          ),
         
         if (isAndroid)
           SettingsSection(title: Text(translate('Hardware Codec')), tiles: [
@@ -594,40 +641,40 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
                     },
             ),
           ]),
-        // if (isAndroid && !outgoingOnly)
-        //   SettingsSection(
-        //     title: Text(translate("Recording")),
-        //     tiles: [
-        //       SettingsTile.switchTile(
-        //         title:
-        //             Text(translate('Automatically record incoming sessions')),
-        //         leading: Icon(Icons.videocam),
-        //         description: Text(
-        //             "${translate("Directory")}: ${bind.mainVideoSaveDirectory(root: false)}"),
-        //         initialValue: _autoRecordIncomingSession,
-        //         onToggle: isOptionFixed(kOptionAllowAutoRecordIncoming)
-        //             ? null
-        //             : (v) async {
-        //                 await bind.mainSetOption(
-        //                     key: kOptionAllowAutoRecordIncoming,
-        //                     value:
-        //                         bool2option(kOptionAllowAutoRecordIncoming, v));
-        //                 final newValue = option2bool(
-        //                     kOptionAllowAutoRecordIncoming,
-        //                     await bind.mainGetOption(
-        //                         key: kOptionAllowAutoRecordIncoming));
-        //                 setState(() {
-        //                   _autoRecordIncomingSession = newValue;
-        //                 });
-        //               },
-        //       ),
-        //     ],
-        //   ),
-        // if (isAndroid &&
-        //     !disabledSettings &&
-        //     !outgoingOnly &&
-        //     !hideSecuritySettings)
-        //   SettingsSection(title: Text('2FA'), tiles: tfaTiles),
+        if (isAndroid && !outgoingOnly)
+          SettingsSection(
+            title: Text(translate("Recording")),
+            tiles: [
+              SettingsTile.switchTile(
+                title:
+                    Text(translate('Automatically record incoming sessions')),
+                leading: Icon(Icons.videocam),
+                description: Text(
+                    "${translate("Directory")}: ${bind.mainVideoSaveDirectory(root: false)}"),
+                initialValue: _autoRecordIncomingSession,
+                onToggle: isOptionFixed(kOptionAllowAutoRecordIncoming)
+                    ? null
+                    : (v) async {
+                        await bind.mainSetOption(
+                            key: kOptionAllowAutoRecordIncoming,
+                            value:
+                                bool2option(kOptionAllowAutoRecordIncoming, v));
+                        final newValue = option2bool(
+                            kOptionAllowAutoRecordIncoming,
+                            await bind.mainGetOption(
+                                key: kOptionAllowAutoRecordIncoming));
+                        setState(() {
+                          _autoRecordIncomingSession = newValue;
+                        });
+                      },
+              ),
+            ],
+          ),
+        if (isAndroid &&
+            !disabledSettings &&
+            !outgoingOnly &&
+            !hideSecuritySettings)
+          SettingsSection(title: Text('2FA'), tiles: tfaTiles),
         if (isAndroid &&
             !disabledSettings &&
             !outgoingOnly &&
@@ -644,49 +691,49 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
           SettingsSection(
             title: Text(translate("Enhancements")),
             tiles: enhancementsTiles,
-          )
-        // SettingsSection(
-        //   title: Text(translate("About")),
-        //   tiles: [
-        //     SettingsTile(
-        //         onPressed: (context) async {
-        //           if (await canLaunchUrl(Uri.parse(url))) {
-        //             await launchUrl(Uri.parse(url));
-        //           }
-        //         },
-        //         title: Text(translate("Version: ") + version),
-        //         value: Padding(
-        //           padding: EdgeInsets.symmetric(vertical: 8),
-        //           child: Text('rustdesk.com',
-        //               style: TextStyle(
-        //                 decoration: TextDecoration.underline,
-        //               )),
-        //         ),
-        //         leading: Icon(Icons.info)),
-        //     SettingsTile(
-        //         title: Text(translate("Build Date")),
-        //         value: Padding(
-        //           padding: EdgeInsets.symmetric(vertical: 8),
-        //           child: Text(_buildDate),
-        //         ),
-        //         leading: Icon(Icons.query_builder)),
-        //     if (isAndroid)
-        //       SettingsTile(
-        //           onPressed: (context) => onCopyFingerprint(_fingerprint),
-        //           title: Text(translate("Fingerprint")),
-        //           value: Padding(
-        //             padding: EdgeInsets.symmetric(vertical: 8),
-        //             child: Text(_fingerprint),
-        //           ),
-        //           leading: Icon(Icons.fingerprint)),
-        //     SettingsTile(
-        //       title: Text(translate("Privacy Statement")),
-        //       onPressed: (context) =>
-        //           launchUrlString('https://rustdesk.com/privacy.html'),
-        //       leading: Icon(Icons.privacy_tip),
-        //     )
-        //   ],
-        // ),
+          ),
+        SettingsSection(
+          title: Text(translate("About")),
+          tiles: [
+            SettingsTile(
+                onPressed: (context) async {
+                  if (await canLaunchUrl(Uri.parse(url))) {
+                    await launchUrl(Uri.parse(url));
+                  }
+                },
+                title: Text(translate("Version: ") + version),
+                value: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: Text('rustdesk.com',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                      )),
+                ),
+                leading: Icon(Icons.info)),
+            SettingsTile(
+                title: Text(translate("Build Date")),
+                value: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: Text(_buildDate),
+                ),
+                leading: Icon(Icons.query_builder)),
+            if (isAndroid)
+              SettingsTile(
+                  onPressed: (context) => onCopyFingerprint(_fingerprint),
+                  title: Text(translate("Fingerprint")),
+                  value: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: Text(_fingerprint),
+                  ),
+                  leading: Icon(Icons.fingerprint)),
+            SettingsTile(
+              title: Text(translate("Privacy Statement")),
+              onPressed: (context) =>
+                  launchUrlString('https://rustdesk.com/privacy.html'),
+              leading: Icon(Icons.privacy_tip),
+            )
+          ],
+        ),
       ],
     );
     return settings;
