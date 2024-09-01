@@ -316,119 +316,119 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
             })
     ];
     final List<AbstractSettingsTile> shareScreenTiles = [
-      // SettingsTile.switchTile(
-      //   title: Text(translate('Deny LAN discovery')),
-      //   initialValue: _denyLANDiscovery,
-      //   onToggle: isOptionFixed(kOptionEnableLanDiscovery)
-      //       ? null
-      //       : (v) async {
-      //           await bind.mainSetOption(
-      //               key: kOptionEnableLanDiscovery,
-      //               value: bool2option(kOptionEnableLanDiscovery, !v));
-      //           final newValue = !option2bool(kOptionEnableLanDiscovery,
-      //               await bind.mainGetOption(key: kOptionEnableLanDiscovery));
-      //           setState(() {
-      //             _denyLANDiscovery = newValue;
-      //           });
-      //         },
-      // ),
-      // SettingsTile.switchTile(
-      //   title: Row(children: [
-      //     Expanded(child: Text(translate('Use IP Whitelisting'))),
-      //     Offstage(
-      //             offstage: !_onlyWhiteList,
-      //             child: const Icon(Icons.warning_amber_rounded,
-      //                 color: Color.fromARGB(255, 255, 204, 0)))
-      //         .marginOnly(left: 5)
-      //   ]),
-      //   initialValue: _onlyWhiteList,
-      //   onToggle: (_) async {
-      //     update() async {
-      //       final onlyWhiteList = whitelistNotEmpty();
-      //       if (onlyWhiteList != _onlyWhiteList) {
-      //         setState(() {
-      //           _onlyWhiteList = onlyWhiteList;
-      //         });
-      //       }
-      //     }
+      SettingsTile.switchTile(
+        title: Text(translate('Deny LAN discovery')),
+        initialValue: _denyLANDiscovery,
+        onToggle: isOptionFixed(kOptionEnableLanDiscovery)
+            ? null
+            : (v) async {
+                await bind.mainSetOption(
+                    key: kOptionEnableLanDiscovery,
+                    value: bool2option(kOptionEnableLanDiscovery, !v));
+                final newValue = !option2bool(kOptionEnableLanDiscovery,
+                    await bind.mainGetOption(key: kOptionEnableLanDiscovery));
+                setState(() {
+                  _denyLANDiscovery = newValue;
+                });
+              },
+      ),
+      SettingsTile.switchTile(
+        title: Row(children: [
+          Expanded(child: Text(translate('Use IP Whitelisting'))),
+          Offstage(
+                  offstage: !_onlyWhiteList,
+                  child: const Icon(Icons.warning_amber_rounded,
+                      color: Color.fromARGB(255, 255, 204, 0)))
+              .marginOnly(left: 5)
+        ]),
+        initialValue: _onlyWhiteList,
+        onToggle: (_) async {
+          update() async {
+            final onlyWhiteList = whitelistNotEmpty();
+            if (onlyWhiteList != _onlyWhiteList) {
+              setState(() {
+                _onlyWhiteList = onlyWhiteList;
+              });
+            }
+          }
 
-      //     changeWhiteList(callback: update);
-      //   },
-      // ),
-      // SettingsTile.switchTile(
-      //   title: Text('${translate('Adaptive bitrate')} (beta)'),
-      //   initialValue: _enableAbr,
-      //   onToggle: isOptionFixed(kOptionEnableAbr)
-      //       ? null
-      //       : (v) async {
-      //           await mainSetBoolOption(kOptionEnableAbr, v);
-      //           final newValue = await mainGetBoolOption(kOptionEnableAbr);
-      //           setState(() {
-      //             _enableAbr = newValue;
-      //           });
-      //         },
-      // ),
-      // SettingsTile.switchTile(
-      //   title: Text(translate('Enable recording session')),
-      //   initialValue: _enableRecordSession,
-      //   onToggle: isOptionFixed(kOptionEnableRecordSession)
-      //       ? null
-      //       : (v) async {
-      //           await mainSetBoolOption(kOptionEnableRecordSession, v);
-      //           final newValue =
-      //               await mainGetBoolOption(kOptionEnableRecordSession);
-      //           setState(() {
-      //             _enableRecordSession = newValue;
-      //           });
-      //         },
-      // ),
-      // SettingsTile.switchTile(
-      //   title: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //       crossAxisAlignment: CrossAxisAlignment.center,
-      //       children: [
-      //         Expanded(
-      //             child: Column(
-      //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //                 children: [
-      //               Text(translate("Direct IP Access")),
-      //               Offstage(
-      //                   offstage: !_enableDirectIPAccess,
-      //                   child: Text(
-      //                     '${translate("Local Address")}: $_localIP${_directAccessPort.isEmpty ? "" : ":$_directAccessPort"}',
-      //                     style: Theme.of(context).textTheme.bodySmall,
-      //                   )),
-      //             ])),
-      //         Offstage(
-      //             offstage: !_enableDirectIPAccess,
-      //             child: IconButton(
-      //                 padding: EdgeInsets.zero,
-      //                 icon: Icon(
-      //                   Icons.edit,
-      //                   size: 20,
-      //                 ),
-      //                 onPressed: isOptionFixed(kOptionDirectAccessPort)
-      //                     ? null
-      //                     : () async {
-      //                         final port = await changeDirectAccessPort(
-      //                             _localIP, _directAccessPort);
-      //                         setState(() {
-      //                           _directAccessPort = port;
-      //                         });
-      //                       }))
-      //       ]),
-      //   initialValue: _enableDirectIPAccess,
-      //   onToggle: isOptionFixed(kOptionDirectServer)
-      //       ? null
-      //       : (_) async {
-      //           _enableDirectIPAccess = !_enableDirectIPAccess;
-      //           String value =
-      //               bool2option(kOptionDirectServer, _enableDirectIPAccess);
-      //           await bind.mainSetOption(
-      //               key: kOptionDirectServer, value: value);
-      //           setState(() {});
-      //         },
-      // )
+          changeWhiteList(callback: update);
+        },
+      ),
+      SettingsTile.switchTile(
+        title: Text('${translate('Adaptive bitrate')} (beta)'),
+        initialValue: _enableAbr,
+        onToggle: isOptionFixed(kOptionEnableAbr)
+            ? null
+            : (v) async {
+                await mainSetBoolOption(kOptionEnableAbr, v);
+                final newValue = await mainGetBoolOption(kOptionEnableAbr);
+                setState(() {
+                  _enableAbr = newValue;
+                });
+              },
+      ),
+      SettingsTile.switchTile(
+        title: Text(translate('Enable recording session')),
+        initialValue: _enableRecordSession,
+        onToggle: isOptionFixed(kOptionEnableRecordSession)
+            ? null
+            : (v) async {
+                await mainSetBoolOption(kOptionEnableRecordSession, v);
+                final newValue =
+                    await mainGetBoolOption(kOptionEnableRecordSession);
+                setState(() {
+                  _enableRecordSession = newValue;
+                });
+              },
+      ),
+      SettingsTile.switchTile(
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    Text(translate("Direct IP Access")),
+                    Offstage(
+                        offstage: !_enableDirectIPAccess,
+                        child: Text(
+                          '${translate("Local Address")}: $_localIP${_directAccessPort.isEmpty ? "" : ":$_directAccessPort"}',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        )),
+                  ])),
+              Offstage(
+                  offstage: !_enableDirectIPAccess,
+                  child: IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: Icon(
+                        Icons.edit,
+                        size: 20,
+                      ),
+                      onPressed: isOptionFixed(kOptionDirectAccessPort)
+                          ? null
+                          : () async {
+                              final port = await changeDirectAccessPort(
+                                  _localIP, _directAccessPort);
+                              setState(() {
+                                _directAccessPort = port;
+                              });
+                            }))
+            ]),
+        initialValue: _enableDirectIPAccess,
+        onToggle: isOptionFixed(kOptionDirectServer)
+            ? null
+            : (_) async {
+                _enableDirectIPAccess = !_enableDirectIPAccess;
+                String value =
+                    bool2option(kOptionDirectServer, _enableDirectIPAccess);
+                await bind.mainSetOption(
+                    key: kOptionDirectServer, value: value);
+                setState(() {});
+              },
+      )
     ];
     if (_hasIgnoreBattery) {
       enhancementsTiles.insert(
