@@ -23,7 +23,7 @@ class ServerPage extends StatefulWidget implements PageShape {
     //         bind.mainGetBuildinOption(key: kOptionHideSecuritySetting) != 'Y')
     //     ? [_DropDownAction()]
     //     : [];
-    ServerPage({ Key ? key }): super(key: key);
+    // ServerPage({ Key ? key }): super(key: key);
     @override
     State < StatefulWidget > createState() => _ServerPageState();
 }
