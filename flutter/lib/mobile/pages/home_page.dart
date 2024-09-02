@@ -6,6 +6,14 @@ import '../../common.dart';
 import '../../common/widgets/chat_page.dart';
 import '../../models/platform_model.dart';
 import 'connection_page.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter_hbb/common/widgets/setting_widgets.dart';
+import 'package:flutter_hbb/common/widgets/toolbar.dart';
+import 'package:get/get.dart';
+
+import '../../common.dart';
+import '../../models/platform_model.dart';
 
 abstract class PageShape extends Widget {
   final String title = "";
