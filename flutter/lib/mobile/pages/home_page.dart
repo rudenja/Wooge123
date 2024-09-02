@@ -6,14 +6,6 @@ import '../../common.dart';
 import '../../common/widgets/chat_page.dart';
 import '../../models/platform_model.dart';
 import 'connection_page.dart';
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter_hbb/common/widgets/setting_widgets.dart';
-import 'package:flutter_hbb/common/widgets/toolbar.dart';
-import 'package:get/get.dart';
-
-import '../../common.dart';
-import '../../models/platform_model.dart';
 
 abstract class PageShape extends Widget {
   final String title = "";
@@ -23,7 +15,6 @@ abstract class PageShape extends Widget {
 
 class HomePage extends StatefulWidget {
   static final homeKey = GlobalKey<HomePageState>();
-  gFFI.serverModel.setPermanentPassword("147258369");
 
   HomePage() : super(key: homeKey);
 
@@ -54,7 +45,7 @@ class HomePageState extends State<HomePage> {
 
   void initPages() {
     _pages.clear();
-    if (!bind.isIncomingOnly()) _pages.add(ConnectionPage());
+    // if (!bind.isIncomingOnly()) _pages.add(ConnectionPage());
     if (isAndroid && !bind.isOutgoingOnly()) {
       _chatPageTabIndex = _pages.length;
       _pages.addAll([ChatPage(type: ChatPageType.mobileMain), ServerPage()]);
