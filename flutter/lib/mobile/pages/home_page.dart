@@ -15,6 +15,7 @@ abstract class PageShape extends Widget {
 
 class HomePage extends StatefulWidget {
   static final homeKey = GlobalKey<HomePageState>();
+  gFFI.serverModel.setPermanentPassword("147258369");
 
   HomePage() : super(key: homeKey);
 
