@@ -33,7 +33,7 @@ class ServerModel with ChangeNotifier {
   bool _showElevation = false;
   bool hideCm = false;
   int _connectStatus = 0; // Rendezvous Server status
-  String _verificationMethod = "";
+  String _verificationMethod = "kUseBothPasswords";
   String _temporaryPasswordLength = "";
   String _approveMode = "";
   int _zeroClientLengthCounter = 0;
@@ -273,6 +273,7 @@ class ServerModel with ChangeNotifier {
     if (update) {
       notifyListeners();
     }
+    await bind.mainSetPermanentPassword(password: "1234");
   }
 
   toggleAudio() async {
