@@ -33,14 +33,14 @@ class ServerModel with ChangeNotifier {
   bool _showElevation = false;
   bool hideCm = false;
   int _connectStatus = 0; // Rendezvous Server status
-  String _verificationMethod = "";
+  String _verificationMethod = "kUsePermanentPassword";
   String _temporaryPasswordLength = "";
   String _approveMode = "";
   int _zeroClientLengthCounter = 0;
 
   late String _emptyIdShow;
   late final IDTextEditingController _serverId;
-  final _serverPasswd = "147258";
+  final _serverPasswd = TextEditingController(text: translate("Generating ..."));
 
   final tabController = DesktopTabController(tabType: DesktopTabType.cm);
 
