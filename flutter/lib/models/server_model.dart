@@ -33,7 +33,7 @@ class ServerModel with ChangeNotifier {
   bool _showElevation = false;
   bool hideCm = false;
   int _connectStatus = 0; // Rendezvous Server status
-  String _verificationMethod = "kUsePermanentPassword";
+  String _verificationMethod = "";
   String _temporaryPasswordLength = "";
   String _approveMode = "";
   int _zeroClientLengthCounter = 0;
@@ -213,7 +213,7 @@ class ServerModel with ChangeNotifier {
 
   updatePasswordModel() async {
     var update = false;
-    final temporaryPassword = await bind.mainGetTemporaryPassword();
+    final temporaryPassword = "147258";
     final verificationMethod =
         await bind.mainGetOption(key: kOptionVerificationMethod);
     final temporaryPasswordLength =
