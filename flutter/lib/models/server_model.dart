@@ -40,8 +40,7 @@ class ServerModel with ChangeNotifier {
 
   late String _emptyIdShow;
   late final IDTextEditingController _serverId;
-  final _serverPasswd =
-      TextEditingController(text: translate("Generating ..."));
+  final _serverPasswd = "147258";
 
   final tabController = DesktopTabController(tabType: DesktopTabType.cm);
 
