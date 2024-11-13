@@ -1,4 +1,4 @@
-Meeimport 'dart:async';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -641,7 +641,7 @@ class ConnectionManager extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Expanded(child: ClientInfo(client)),
+                      Expanded(child: ClientInfo(client)),
                       Expanded(
                           flex: -1,
                           child: client.isFileTransfer || !client.authorized
