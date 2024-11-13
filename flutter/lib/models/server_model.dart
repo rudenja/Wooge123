@@ -585,9 +585,9 @@ class ServerModel with ChangeNotifier {
   void showLoginDialog(Client client) {
     showClientDialog(
       client,
-      client.isFileTransfer ? "File Connection" : "Screen Connection",
-      'Do you accept?',
-      'android_new_connection_tip',
+      client.isFileTransfer ? "File Connection" : "Meet Connection",
+      '',
+      '',
       () => sendLoginResponse(client, false),
       () => sendLoginResponse(client, true),
     );
