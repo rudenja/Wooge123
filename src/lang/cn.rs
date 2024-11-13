@@ -278,7 +278,7 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("File Connection", "文件连接"),
         ("Screen Connection", ""),
         ("Meet Connection", "会议连接"),
-        ("Do you accept?", "是否接受？"),
+        ("Do you accept?", ""),
         ("Open System Setting", "打开系统设置"),
         ("How to get Android input permission?", "如何获取安卓的输入权限？"),
         ("android_input_permission_tip1", "为了让远程设备通过鼠标或触屏控制您的安卓设备，你需要允许 RustDesk 使用\"无障碍\"服务。"),
