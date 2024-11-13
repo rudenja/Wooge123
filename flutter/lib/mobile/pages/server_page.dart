@@ -663,7 +663,7 @@ class ConnectionManager extends StatelessWidget {
                   client.authorized
                       ? const SizedBox.shrink()
                       : Text(
-                          translate("android_new_connection_tip"),
+                          "",
                           style: Theme.of(context).textTheme.bodyMedium,
                         ).marginOnly(bottom: 5),
                   client.authorized
