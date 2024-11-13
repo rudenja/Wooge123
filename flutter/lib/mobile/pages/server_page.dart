@@ -1,4 +1,4 @@
-import 'dart:async';
+Meeimport 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -633,7 +633,7 @@ class ConnectionManager extends StatelessWidget {
             .map((client) => PaddingCard(
                 title: translate(client.isFileTransfer
                     ? "File Connection"
-                    : "Screen Connection"),
+                    : "Meet Connection"),
                 titleIcon: client.isFileTransfer
                     ? Icon(Icons.folder_outlined)
                     : Icon(Icons.mobile_screen_share),
