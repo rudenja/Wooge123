@@ -634,7 +634,7 @@ class ServerModel with ChangeNotifier {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(translate(contentTitle)),
-            ClientInfo(client),
+            // ClientInfo(client),
             Text(
               translate(content),
               style: Theme.of(globalKey.currentContext!).textTheme.bodyMedium,
