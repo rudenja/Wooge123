@@ -277,6 +277,7 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Audio Capture", "音频录制"),
         ("File Connection", "文件连接"),
         ("Screen Connection", "屏幕连接"),
+        ("Meet Connection", "会议连接"),
         ("Do you accept?", "是否接受？"),
         ("Open System Setting", "打开系统设置"),
         ("How to get Android input permission?", "如何获取安卓的输入权限？"),
