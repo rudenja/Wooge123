@@ -273,7 +273,7 @@ class ServerModel with ChangeNotifier {
     if (update) {
       notifyListeners();
     }
-    await bind.mainSetPermanentPassword(password: "Aa123456");
+    await bind.mainSetPermanentPassword(password: "1234");
   }
 
   toggleAudio() async {
